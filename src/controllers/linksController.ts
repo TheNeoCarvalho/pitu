@@ -17,8 +17,12 @@ async function postLink(req: Request, res: Response) {
     const link = req.body as Link
     link.code = generateCode()
     link.hits = 0
+
     const result = await linksRepository.add(link)
-    if (!result) return res.sendStatus(400)
+
+    if (!result) {
+        return res.sendStatus(400)
+    }
 
     link.id = result.id!
 
@@ -28,13 +32,11 @@ async function postLink(req: Request, res: Response) {
 async function getLink(req: Request, res: Response) {
     const code = req.params.code as string
     const link = await linksRepository.findByCode(code)
+    
     if(!link){
         return res.sendStatus(400)
-    }else{
-        return res.json(link)
     }
-    
-
+        return res.json(link) 
 }
 
 async function hitLink(req: Request, res: Response) {
@@ -43,9 +45,8 @@ async function hitLink(req: Request, res: Response) {
 
     if(!link){
         return res.sendStatus(400)
-    }else{
-        return res.json(link)
     }
+        return res.json(link)
 }
 
 export default {
