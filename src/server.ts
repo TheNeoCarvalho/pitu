@@ -5,6 +5,4 @@ database.sync({
     force: true
 })
 
-
-
-app.listen(3333)
+app.listen(3001)
