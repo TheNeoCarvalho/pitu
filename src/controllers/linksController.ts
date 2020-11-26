@@ -26,7 +26,7 @@ async function postLink(req: Request, res: Response) {
 
     link.id = result.id!
 
-    res.status(201).json(link)
+    res.json(link)
 }
 
 async function getLink(req: Request, res: Response) {
